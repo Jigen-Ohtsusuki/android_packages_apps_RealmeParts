@@ -42,6 +42,7 @@ public class DozeSettingsFragment extends PreferenceFragment implements OnPrefer
 
     private MainSwitchPreference mSwitchBar;
     private SwitchPreference mAlwaysOnDisplayPreference;
+    private SwitchPreference mAodDt2wPreference;
     private SwitchPreference mPickUpPreference;
     private SwitchPreference mRaiseToWakePreference;
     private SwitchPreference mPocketPreference;
@@ -78,6 +79,10 @@ public class DozeSettingsFragment extends PreferenceFragment implements OnPrefer
         SwitchPreference raiseToWakeGesture = (SwitchPreference) getPreferenceScreen().
                 findPreference(DozeUtils.GESTURE_RAISE_TO_WAKE);
 
+        mAodDt2wPreference = (SwitchPreference) findPreference(DozeUtils.AOD_DT2W_KEY);
+        mAodDt2wPreference.setEnabled(dozeEnabled);
+        mAodDt2wPreference.setOnPreferenceChangeListener(this);
+
         mPickUpPreference = (SwitchPreference) findPreference(DozeUtils.GESTURE_PICK_UP_KEY);
         mPickUpPreference.setEnabled(dozeEnabled);
         mPickUpPreference.setOnPreferenceChangeListener(this);
@@ -97,7 +102,9 @@ public class DozeSettingsFragment extends PreferenceFragment implements OnPrefer
         // Hide AOD if not supported and set all its dependents otherwise
         if (!DozeUtils.alwaysOnDisplayAvailable(getActivity())) {
             getPreferenceScreen().removePreference(mAlwaysOnDisplayPreference);
+            mAodDt2wPreference.setEnabled(false);
         } else {
+            mAodDt2wPreference.setEnabled(DozeUtils.isAlwaysOnEnabled(getActivity()));
             mPickUpPreference.setDependency(DozeUtils.ALWAYS_ON_DISPLAY);
             pickupSensorCategory.setDependency(DozeUtils.ALWAYS_ON_DISPLAY);
             proximitySensorCategory.setDependency(DozeUtils.ALWAYS_ON_DISPLAY);
@@ -110,9 +117,13 @@ public class DozeSettingsFragment extends PreferenceFragment implements OnPrefer
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (DozeUtils.ALWAYS_ON_DISPLAY.equals(preference.getKey())) {
             DozeUtils.enableAlwaysOn(getActivity(), (Boolean) newValue);
+            mAodDt2wPreference.setEnabled((Boolean) newValue);
         }
 
-        mHandler.post(() -> DozeUtils.checkDozeService(getActivity()));
+        mHandler.post(() -> {
+            DozeUtils.checkDozeService(getActivity());
+            DozeUtils.checkAodDt2w(getActivity());
+        });
 
         return true;
     }
@@ -129,6 +140,7 @@ public class DozeSettingsFragment extends PreferenceFragment implements OnPrefer
             mAlwaysOnDisplayPreference.setChecked(false);
         }
         mAlwaysOnDisplayPreference.setEnabled(isChecked);
+        mAodDt2wPreference.setEnabled(isChecked && DozeUtils.isAlwaysOnEnabled(getActivity()));
 
         mPickUpPreference.setEnabled(isChecked);
         mRaiseToWakePreference.setEnabled(isChecked);

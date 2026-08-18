@@ -38,6 +38,13 @@
 
     <SwitchPreference
         android:icon="@drawable/ic_doze_wake"
+        android:key="aod_dt2w"
+        android:defaultValue="false"
+        android:title="@string/aod_dt2w_title"
+        android:summary="@string/aod_dt2w_summary" />
+
+    <SwitchPreference
+        android:icon="@drawable/ic_doze_wake"
         android:key="gesture_raise_to_wake"
         android:defaultValue="true"
         android:title="@string/wake_gesture_title"

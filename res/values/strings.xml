@@ -102,4 +102,8 @@
     <string name="smart_wake_gesture_title">Smart Wake</string>
     <string name="smart_wake_gesture_summary">Pulse notifications on slight motion of device and wake screen when picked up</string>
         
+    <!-- Always on Display Double Tap -->
+    <string name="aod_dt2w_title">AOD Double Tap</string>
+    <string name="aod_dt2w_summary">Wake the screen by double tapping on Always on Display</string>
+    
 </resources>

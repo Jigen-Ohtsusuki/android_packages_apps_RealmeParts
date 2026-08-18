@@ -42,6 +42,9 @@ public final class DozeUtils {
     protected static final String GESTURE_POCKET_KEY = "gesture_pocket";
     protected static final String GESTURE_RAISE_TO_WAKE = "gesture_raise_to_wake";
     protected static final String GESTURE_SMART_WAKE_KEY = "gesture_smart_wake";
+    protected static final String AOD_DT2W_KEY = "aod_dt2w";
+    
+    private static final String AOD_DT2W_NODE = "/proc/touchpanel/aod_dt2w_enable";
     private static final String TAG = "DozeUtils";
     private static final boolean DEBUG = false;
     private static final String DOZE_INTENT = "com.android.systemui.doze.pulse";
@@ -132,5 +135,15 @@ public final class DozeUtils {
             }
         }
         return null;
+    }
+
+    protected static boolean isAodDt2wEnabled(Context context) {
+        return isGestureEnabled(context, AOD_DT2W_KEY);
+    }
+
+    public static void checkAodDt2w(Context context) {
+        if (com.realmeparts.Utils.fileWritable(AOD_DT2W_NODE)) {
+            com.realmeparts.Utils.writeValue(AOD_DT2W_NODE, isAodDt2wEnabled(context) ? "1" : "0");
+        }
     }
 }
