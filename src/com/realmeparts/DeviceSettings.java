@@ -28,9 +28,8 @@ import android.view.Display;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceFragment;
 import androidx.preference.PreferenceManager;
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
 import androidx.preference.TwoStatePreference;
 
 import org.json.JSONArray;
@@ -40,7 +39,10 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.text.DecimalFormat;
 
-public class DeviceSettings extends PreferenceFragment
+import com.android.settingslib.widget.SettingsBasePreferenceFragment;
+import com.android.settingslib.widget.SettingsBasePreferenceFragment;
+
+public class DeviceSettings extends SettingsBasePreferenceFragment
         implements Preference.OnPreferenceChangeListener {
 
     public static final String KEY_SRGB_SWITCH = "srgb";
@@ -78,7 +80,7 @@ public class DeviceSettings extends PreferenceFragment
     private TwoStatePreference mOTGModeSwitch;
     private TwoStatePreference mGameModeSwitch;
     private TwoStatePreference mSmartChargingSwitch;
-    private SwitchPreference mFpsInfo;
+    private SwitchPreferenceCompat mFpsInfo;
     private boolean CABC_DeviceMatched;
     private boolean DC_DeviceMatched;
     private boolean HBM_DeviceMatched;
@@ -90,7 +92,7 @@ public class DeviceSettings extends PreferenceFragment
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.getContext());
         prefs.edit().putString("ProductName", ProductName).apply();
 
-        addPreferencesFromResource(R.xml.main);
+        setPreferencesFromResource(R.xml.main, rootKey);
 
         mDCModeSwitch = findPreference(KEY_DC_SWITCH);
         mDCModeSwitch.setEnabled(DCModeSwitch.isSupported());

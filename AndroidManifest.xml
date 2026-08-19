@@ -56,6 +56,7 @@
         <activity
             android:name=".DeviceSettingsActivity"
             android:label="@string/device_title"
+            android:theme="@style/Theme.SubSettingsBase"
             android:exported="true">
             <meta-data
                 android:name="com.android.settings.order"

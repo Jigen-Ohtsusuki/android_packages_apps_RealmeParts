@@ -17,23 +17,25 @@
  */
 package com.realmeparts;
 
-import android.app.Activity;
-import android.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 
-public class DeviceSettingsActivity extends Activity {
+import com.android.settingslib.collapsingtoolbar.CollapsingToolbarBaseActivity;
+
+public class DeviceSettingsActivity extends CollapsingToolbarBaseActivity {
 
     private DeviceSettings mDeviceSettingsFragment;
+    private static final String TAG_DEVICE = "device_settings";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Fragment fragment = getFragmentManager().findFragmentById(android.R.id.content);
+        Fragment fragment = getSupportFragmentManager().findFragmentById(com.android.settingslib.collapsingtoolbar.R.id.content_frame);
         if (fragment == null) {
             mDeviceSettingsFragment = new DeviceSettings();
-            getFragmentManager().beginTransaction()
-                    .add(android.R.id.content, mDeviceSettingsFragment)
+            getSupportFragmentManager().beginTransaction()
+                    .add(com.android.settingslib.collapsingtoolbar.R.id.content_frame, mDeviceSettingsFragment, TAG_DEVICE)
                     .commit();
         } else {
             mDeviceSettingsFragment = (DeviceSettings) fragment;

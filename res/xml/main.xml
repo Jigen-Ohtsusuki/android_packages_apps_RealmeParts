@@ -10,12 +10,12 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:settings="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory app:allowDividerAbove="true" app:allowDividerBelow="true"
         android:key="charging"
         android:title="@string/smart_charging_main_title">
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="smart_charging"
             android:icon="@drawable/ic_charging_main"
             android:summary="@string/smart_charging_summary"
@@ -41,14 +41,14 @@
             android:layout_gravity="center_vertical"
             android:layout_width="match_parent"/>
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="reset_stats"
             android:icon="@drawable/ic_info_outline_24dp"
             android:title="@string/reset_stats_title"
             android:summary="@string/reset_stats_summary" />
     </PreferenceCategory>
 
-    <PreferenceCategory
+    <PreferenceCategory app:allowDividerAbove="true" app:allowDividerBelow="true"
         android:key="graphics"
         android:title="@string/display_title">
 
@@ -61,31 +61,31 @@
             android:defaultValue="0"
             android:title="@string/cabc_title" />
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:icon="@drawable/dc_mode_icon"
             android:key="dc"
             android:summary="@string/dc_mode_summary"
             android:title="@string/dc_mode_title" />
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="hbm"
             android:icon="@drawable/ic_hbm"
             android:summary="@string/hbm_mode_summary"
             android:title="@string/hbm_mode_title" />
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:icon="@drawable/srgb_mode_icon"
             android:key="srgb"
             android:summary="@string/srgb_mode_summary"
             android:title="@string/srgb_mode_title" />
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:icon="@drawable/game_mode_icon"
             android:key="game"
             android:summary="@string/game_mode_summary"
             android:title="@string/game_mode_title" />
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="dnd"
             android:icon="@drawable/ic_info_outline_24dp"
             android:title="@string/dnd_title"
@@ -103,7 +103,7 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory
+    <PreferenceCategory app:allowDividerAbove="true" app:allowDividerBelow="true"
         android:key="refresh_rate"
         android:title="@string/refresh_title">
 
@@ -122,7 +122,7 @@
             android:title="@string/refresh_rate_90_title"
             android:summary="@string/refresh_rate_90_summary"  />
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="refresh_rate_90Forced"
             android:icon="@drawable/refresh_rate_90forced_icon"
             android:summary="@string/refresh_rate_90Forced_summary"
@@ -130,17 +130,17 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory
+    <PreferenceCategory app:allowDividerAbove="true" app:allowDividerBelow="true"
         android:key="misc"
         android:title="@string/misc_title">
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:icon="@drawable/usb_otg_icon"
             android:key="otg"
             android:summary="@string/otg_mode_summary"
             android:title="@string/otg_mode_title" />
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:icon="@drawable/fps_info_icon"
             android:key="fps_info"
             android:title="@string/fps_info_title"
